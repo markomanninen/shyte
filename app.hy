@@ -1,9 +1,20 @@
-; Copyright (c) Paul R. Tagliamonte <tag@pault.ag>, 2013 under the terms of
-; hy.
+; Copyright (c) Paul R. Tagliamonte <tag@pault.ag>, 2013 under the terms of hy.
+; Copyright (c) Marko Manninen <elonmedia@gmail.com>, 2017 under the terms of HyML.
 
-(require hy.contrib.meth)
-(import [flask [Flask render-template]])
+(import [flask [Flask]])
+(require [hyml.minimal [*]])
+(import [hyml.minimal [*]])
 
-(setv app (Flask "__main__"))  ; long story, needed hack
+(def app (Flask "__main__"))
 
-(route repl "/" [] (render-template "index.html"))
+(deffun head (fn [charset]
+  `(meta :charset ~charset)))
+
+(deffun url_for (fn [controller &optional [filename ""]]
+  (% "%s/%s" (, controller filename))))
+
+(with-decorator (app.route "/")
+  (defn index [] 
+    (do
+      (defvar title "Hy, World!")
+      (ml ~@(include "templates/index.hyml")))))

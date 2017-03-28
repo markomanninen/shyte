@@ -1,25 +1,23 @@
 sHyte
 =====
 
-This is the web-site for `hy <https://github.com/hylang/hy>`_.
+This is a web-site written with `Hy <https://github.com/hylang/hy>`__ using `HyML <https://github.com/markomanninen/hyml>`__ 
+for HTML content generation and template processing.
 
-At its heart, it's a Flask webapp written in hy (gasp) for hy (gasp)
-that lets you write hy (gasp) and see it's Python equivalent (Python
-is the best!).
 
 Setup
 -----
 
-Run:
-
-1. Run: ``pip install -r requirements.txt``
-2. Install dependencies listed in ``dependencies``
-3. Compile coffeescript and less files by ``make``
+```
+$ pip install -r requirements.txt
+```
 
 
 Run
 ---
 
-Do something like::
+By default running the development webserver and the project application in: http://localhost:5000/
 
-    $ python shim.py
+```
+$ python shim.py
+```
