@@ -7,10 +7,10 @@
 
 (def app (Flask "__main__"))
 
-(deffun head (fn [charset]
+(deffun charset (fn [charset]
   `(meta :charset ~charset)))
 
-(deffun url_for (fn [controller &optional [filename ""]]
+(deffun url (fn [controller &optional [filename ""]]
   (% "%s/%s" (, controller filename))))
 
 (with-decorator (app.route "/")
@@ -18,3 +18,12 @@
     (do
       (defvar title "Hy, World!")
       (ml ~@(include "templates/index.hyml")))))
+
+(with-decorator (app.route "/<username>/")
+  (defn greeting [username] 
+    (do
+
+(with-decorator (app.route "/<int:a>+<int:b>/")
+  (defn addition [a b] 
+    (do
+      (defvar title "Hy, Math Adder!")

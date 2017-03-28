@@ -1,45 +1,5 @@
-(h1 :class "small" "An investigation")
-(h1 :class "micro" "on")
-(h1 "Writing Python in Lisp,")
-(h1 :class "micro" "including")
-(h2 "bidirectional Python compatibility, macros")
-(h2 "and s-expressions.")
-(div :class "spacer")
-(h2 :class "micro" "by")
-(h2 :class "author" "A ragtag group of hackers")
-(h2 :class "micro" "For a full list, check the AUTHORS file")
-(div :class "spacer")
-(div :class "spacer")
-(h2 "Chapter I.")
-(h2 :class "micro" "Nature and design of this work")
-(main 
-    (p :class "first" "Hy
-        is a project to compile a Lisp variant down to
-        Python AST. It does this by being just way too clever for its own
-        good. Hy is a front-end (not unlike gcc or clang) that parses,
-        lexes and compiles S-Expressions into an IR (in our case, Python
-        AST.)")
-    (p "There are a number of core rules you must keep in mind when working with
-        Hy. The most fundamental is that Hy compiles to Python, directly. This
-        means everything is always bidirectionally compatible, which means you can
-        do such crazy things as write Django apps in Hy.")
-    (ol (li "Dashes turn to underscores")
-        (li "So called &ldquo;earmuffs&rdquo; get converted to uppercase")
-        (li "Remember that you have all of Python's stdlib and module
-                    ecosystem at your fingertips"))
-    (p "Hy code should be runnable on Python version 2.6, 2.7, 3.2, or 3.3 as well
-        as pypy. It might need some small changes (bytes vs strings, some functions
-        return generators in Python 3), but most things work great."))
-(div :class "spacer")
-(h2 "Chapter II.")
-(h2 :class "micro" "&ldquo;How to get Hy really fast&rdquo;")
-(main 
-    (p :class "first" "Getting started with Hy is a snap; just install
-        virtualenv, activate the virtualenv and go ahead and " (i "pip install hy") ". 
-        Now the " (i "hy(1)") " command is ready for REPL-ication and general
-        tomfoolery.")
-    (p "$ hy" (br) "=&gt; (+ 1 2 (* 2 3))" (br) "9" (br))
-    (p "Feel free to go and hit up our" 
-        (a :href "https://github.com/hylang/hy" "GitHub") ", report your bugs,
-        star the repo, and hack with it.")
-    (div :class "spacer"))
+(h1 "Welcome to HyML powered Flask web application written with Hy!")
+(p "There are two thing you can do:")
+(ul
+    (li "Greet " (a :href ~(url "yourself") "yourself"))
+    (li "Add numbers like " (a :href ~(url "/1+1") "John Nash")))

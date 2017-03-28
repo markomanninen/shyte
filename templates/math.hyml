@@ -6,4 +6,9 @@
         ~(charset "UTF-8"))
     (body
         (div :class "container"
-            ~@(include "templates/content.hyml"))))
+        	(h2 ~title)
+        	(p "Let's add some numbers you provided on url:")
+            (p ~a " + " ~b)
+            (p "=")
+            (p ~(+ a b))
+            (p (a :href "/" "< Back")))))

@@ -6,4 +6,5 @@
         ~(charset "UTF-8"))
     (body
         (div :class "container"
-            ~@(include "templates/content.hyml"))))
+            (h1 "Hy, to " ~username !)
+            (p (a :href "/" "< Back")))))
