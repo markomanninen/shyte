@@ -22,8 +22,11 @@
 (with-decorator (app.route "/<username>/")
   (defn greeting [username] 
     (do
+      (setv vars {"username" username "title" (% "Hy, %s!" username)})
+      (parse-mnml `(do ~@(include "templates/greeting.hyml")) vars))))
 
 (with-decorator (app.route "/<int:a>+<int:b>/")
   (defn addition [a b] 
     (do
       (defvar title "Hy, Math Adder!")
+      (parse-mnml `(do ~@(include "templates/math.hyml")) {"a" a "b" b}))))
