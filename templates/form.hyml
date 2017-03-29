@@ -3,5 +3,11 @@
 ; an optional parameter list to the render template function
 ; these will of course override variables and function that were
 ; defined in the main controller / method
-~(setv vars {"body" (ml (p "Something..."))})
-~(extend "templates/layout.hyml" vars (globals))
+~(setv vars {"body" (ml `(div 
+  (h1 "Hy, to " ~customname !)
+  (form :method "post" :action ~(url "/formpage")
+    (p "Your name: " (input :name "customname" :value ~(if (empty? customname) "yourself" customname)))
+    (p (input :type "submit")))
+  (p (a :href ~(url "") "< Back"))) (globals))})
+
+~(extend-template "layout.hyml" vars (globals))
