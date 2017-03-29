@@ -6,5 +6,8 @@
         ~(charset "UTF-8"))
     (body
         (div :class "container"
-            (h1 "Hy, to " ~username !)
-            (p (a :href "/" "< Back")))))
+            (h1 "Hy, to " ~customname !)
+            (form :method "get" :action ~(url "/yourself")
+              (p "Your name: " (input :name "customname" :value ~(if (empty? customname) "yourself" customname)))
+              (p (input :type "submit")))
+            (p (a :href ~(url "") "< Back")))))
