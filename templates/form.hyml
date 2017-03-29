@@ -1,0 +1,7 @@
+; other way around to use jinja2 alike extend templates / blocks
+; define a "block" aka. variables and functions to be used as
+; an optional parameter list to the render template function
+; these will of course override variables and function that were
+; defined in the main controller / method
+~(setv vars {"body" (ml (p "Something..."))})
+~(extend "templates/layout.hyml" vars (globals))

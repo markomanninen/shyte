@@ -6,11 +6,7 @@
 (import [hyml.minimal [*]])
 (import html)
 
-(def SECRET_KEY "development")
-
 (def app (Flask "__main__"))
-
-;(app.secret_key SECRET_KEY)
 
 ; hy.contrib.meth was remove from hy codebase, but this is a useful macro
 ; source: https://github.com/hylang/hy/blob/407a79591a42376d1add25c01514b10adfcda194/hy/contrib/meth.hy
@@ -22,11 +18,18 @@
        (defn ~name ~params
          (do ~@code))))
 
-; should take previus variables and pass them to next template
-; or maybe parse-mnml already does this?!
-(defmacro extends [tmpl vars])
+(defn extend [tmpl &rest args] 
+  (setv vars {})
+  (for [d args] (setv vars (merge-two-dicts d vars)))
+  (render-template tmpl vars))
 
-(defn render-template [tmpl &optional [vars {}]]
+; should take previus variables and pass them to next template
+(defn render-template [tmpl &rest args]
+  ; we want to get a recursive access to render-template function to
+  ; enable "extend" / blocks functionality in templates
+  (setv vars (globals))
+  ; pass variables from arguments
+  (for [d args] (setv vars (merge-two-dicts d vars)))
   (parse-mnml `(do ~@(include tmpl)) vars))
 
 (defn with-session [tmpl &optional [vars {}]]
@@ -88,17 +91,13 @@
   (render-template "templates/math.hyml" vars))
 
 ;; AJAX ADDITION
-(with-decorator (app.route "/ajaxpage/")
-  (defn ajaxpage [] 
-    (do
-      (setv vars {"title" "Hy, MathJax Adder!"})
-      (render-template "templates/ajax.hyml" vars))))
+(route-with-methods ajaxpage "/ajaxpage/" ["GET"] []
+  (setv vars {"title" "Hy, MathJax Adder!"})
+  (render-template "templates/ajax.hyml" vars))
 
 ;; AJAX CALL HANDLER
-(with-decorator (app.route "/ajaxcall/")
-  (defn ajaxcall [a b] 
-    (do
-      (render-template "templates/ajax.hyml"))))
+(route-with-methods ajaxcall "/ajaxcall/" ["POST"] [a b]
+  (render-template "templates/ajax.hyml"))
 
 ;; GET REQUEST
 (with-decorator (app.route "/req/")
@@ -114,8 +113,10 @@
 (with-decorator (app.route "/formpage/")
   (defn formpage [] 
     (do
-      (setv vars {"title" "Hy, Poster!"
-                  "body" (get request.args "body")})
+      (setv vars {"title" "Hy, Poster!!"
+                  "body" (if (in "body" request.args)
+                             (get request.args "body")
+                             "No body parameter found.")})
       (with-request "templates/form.hyml" vars))))
 
 ;; USER SESSION

@@ -1,1 +1,6 @@
+; one way around to use jinja2 alike extend templates / blocks
+; define a "block" aka. variables and functions to be used on the
+; layout with defvar / deffun macros. these will override things 
+; that a defined in the main controller / method
+~(defvar body (p "body..."))
 ~@(include "templates/layout.hyml")
