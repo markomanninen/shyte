@@ -1,5 +1,9 @@
 (h1 "Welcome to HyML powered Flask web application written with Hy!")
-(p "There are two thing you can do:")
+(p "There are few thing you can do:")
 (ul
     (li "Greet " (a :href ~(url "yourself") "yourself"))
+    (li "Pass GET " (a :href ~(url "req") "parameters"))
+    (li "Handle " (a :href ~(url "session") "sessions"))
+    (li "Submit " (a :href ~(url "formpage") "forms"))
+    (li "Ajax " (a :href ~(url "ajaxpage") "things"))
     (li "Add numbers like " (a :href ~(url "/1+1") "John Nash")))

@@ -1,1 +1,1 @@
-ajax.hyml
+~@(include "templates/layout.hyml")
