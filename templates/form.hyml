@@ -3,11 +3,15 @@
 ; an optional parameter list to the render template function
 ; these will of course override variables and function that were
 ; defined in the main controller / method
-~(setv vars {"body" (ml `(div 
-  (h1 "Hy, to " ~customname !)
-  (form :method "post" :action ~(url "/formpage")
-    (p "Your name: " (input :name "customname" :value ~(if (empty? customname) "yourself" customname)))
-    (p (input :type "submit")))
-  (p (a :href ~(url "") "< Back"))) (globals))})
+~(do
+  
+  (defmacro extend-template* [tmpl &rest args]
+  `(apply render-template (extend (extend [~tmpl] ~args) [(globals)])))
 
-~(extend-template "layout.hyml" vars (globals))
+  (extend-template* "layout.hyml" {"body" 
+  (parse-mnml `(div 
+    (h1 "Hy, to " ~customname !)
+    (form :method "post" :action ~(url "/formpage")
+      (p "Your name: " (input :name "customname" :value ~customname))
+      (p (input :type "submit")))
+    (p (a :href ~(url "") "< Back"))))}))

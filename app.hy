@@ -2,8 +2,13 @@
 ; Copyright (c) Marko Manninen <elonmedia@gmail.com>, 2017 under the terms of HyML.
 
 (import [flask [Flask session request]])
+
 (require [hyml.minimal [*]])
 (import [hyml.minimal [*]])
+
+(require [template [*]])
+(import [template [*]])
+
 (import html)
 
 (def template-dir "templates/")
@@ -26,6 +31,11 @@
 ; to imitate jinja and mako
 (defn extend-template [tmpl &rest args]
   (apply render-template (extend [tmpl] args)))
+
+; to imitate jinja and mako
+; ~(extend-template "layout.hyml" {"var1" "val1" "var2" "val2"})
+(defmacro extend-template* [tmpl &rest args]
+  `(apply render-template (extend (extend [~tmpl] ~args) (globals))))
 
 ; should take previus variables and pass them to the next template
 (defn render-template [tmpl &rest args]
@@ -104,7 +114,7 @@
   (render-template "request.hyml" vars))
 
 ;; POST FORM
-(route-with-methods formpage "/formpage/" ["POST"] []
+(route-with-methods formpage "/formpage/" ["GET" "POST"] []
   (setv customname
     (html.escape (if (in "customname" request.form)
                      (get request.form "customname")
