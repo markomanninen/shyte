@@ -2,9 +2,9 @@
 ; Copyright (c) Marko Manninen <elonmedia@gmail.com>, 2017 under the terms of HyML.
 
 (import [flask [Flask session request]])
-(require [hyml.minimal [*]])
-(import [hyml.minimal [*]])
+; render-template, ml
 (require [hyml.template [*]])
+; extend-template, variables-and-functions
 (import [hyml.template [*]])
 (import html)
 
@@ -61,31 +61,31 @@
     (html.escape (if (in "customname" request.args)
                      (get request.args "customname")
                      username)))
-  (setv locvars {"customname" customname
-                 "title" (% "Hy, %s!" customname)})
-  (render-template "greeting.hyml" locvars variables-and-functions))
+  (setv locvar {"customname" customname
+                "title" (% "Hy, %s!" customname)})
+  (render-template "greeting.hyml" locvar variables-and-functions))
 
 ;; MATH ADDITION
 (route-with-methods addition "/<int:a>+<int:b>/" ["GET"] [a b]
-  (setv locvars {"title" "Hy, Math Adder!" "a" a "b" b})
-  (render-template "math.hyml" locvars variables-and-functions))
+  (setv locvar {"title" "Hy, Math Adder!" "a" a "b" b})
+  (render-template "math.hyml" locvar variables-and-functions))
 
 ;; AJAX ADDITION
 (route-with-methods ajaxpage "/ajaxpage/" ["GET"] []
-  (setv vars {"title" "Hy, MathJax Adder!"})
-  (render-template "ajax.hyml" vars))
+  (setv locvar {"title" "Hy, MathJax Adder!"})
+  (render-template "ajax.hyml" locvar variables-and-functions))
 
 ;; AJAX CALL HANDLER
 (route-with-methods ajaxcall "/ajaxcall/" ["POST"] [a b]
-  (render-template "ajax.hyml"))
+  (render-template "ajax.hyml" variables-and-functions))
 
 ;; GET REQUEST
 (route-with-methods req "/req/" ["GET"] []
-  (setv vars {"title" "Hy, Requestor!"
-              "body" (if (in "body" request.args)
-                         (get request.args "body")
-                         "No body parameter found.")})
-  (render-template "request.hyml" vars))
+  (setv locvar {"title" "Hy, Requestor!"
+                "body" (if (in "body" request.args)
+                           (get request.args "body")
+                           "No body parameter found.")})
+  (render-template "request.hyml" locvar variables-and-functions))
 
 ;; POST FORM
 (route-with-methods formpage "/formpage/" ["GET" "POST"] []
@@ -93,9 +93,9 @@
     (html.escape (if (in "customname" request.form)
                      (get request.form "customname")
                      "Visitor")))
-  (setv locvars {"customname" customname
-              "title" (% "Hy, %s!" customname)})
-  (render-template "form.hyml" locvars variables-and-functions))
+  (setv locvar {"customname" customname
+                "title" (% "Hy, %s!" customname)})
+  (render-template "form.hyml" locvar variables-and-functions))
 
 ;; USER SESSION
 (route-with-methods sessionpage "/session/" ["GET"] []
