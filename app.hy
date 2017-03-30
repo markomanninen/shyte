@@ -2,16 +2,13 @@
 ; Copyright (c) Marko Manninen <elonmedia@gmail.com>, 2017 under the terms of HyML.
 
 (import [flask [Flask session request]])
-
 (require [hyml.minimal [*]])
 (import [hyml.minimal [*]])
-
-(require [template [*]])
-(import [template [*]])
-
+(require [hyml.template [*]])
+(import [hyml.template [*]])
 (import html)
 
-(def template-dir "templates/")
+;(def template-dir "templates/")
 
 (def app (Flask "__main__"))
 
@@ -24,29 +21,6 @@
   `(with-decorator (apply app.route [~path] {"methods" ~methods})
        (defn ~name ~params
          (do ~@code))))
-
-; return / chain extended list rather than extending in-place (.extend)
-(defn extend [a b] (.extend a b) a)
-
-; to imitate jinja and mako
-(defn extend-template [tmpl &rest args]
-  (apply render-template (extend [tmpl] args)))
-
-; to imitate jinja and mako
-; ~(extend-template "layout.hyml" {"var1" "val1" "var2" "val2"})
-(defmacro extend-template* [tmpl &rest args]
-  `(apply render-template (extend (extend [~tmpl] ~args) (globals))))
-
-; should take previus variables and pass them to the next template
-(defn render-template [tmpl &rest args]
-  ; prefix template with dir
-  (setv tmpl (+ template-dir tmpl))
-  ; we want to get a recursive access to render-template and extendd-template
-  ; functions to enable "extend" / blocks functionality in templates
-  (setv vars (globals))
-  ; pass variables from arguments
-  (for [d args] (setv vars (merge-two-dicts d vars)))
-  (parse-mnml `(do ~@(include tmpl)) vars))
 
 (deffun charset (fn [charset]
   `(meta :charset ~charset)))
@@ -87,14 +61,14 @@
     (html.escape (if (in "customname" request.args)
                      (get request.args "customname")
                      username)))
-  (setv vars {"customname" customname
-              "title" (% "Hy, %s!" customname)})
-  (render-template "greeting.hyml" vars))
+  (setv locvars {"customname" customname
+                 "title" (% "Hy, %s!" customname)})
+  (render-template "greeting.hyml" locvars variables-and-functions))
 
 ;; MATH ADDITION
 (route-with-methods addition "/<int:a>+<int:b>/" ["GET"] [a b]
-  (setv vars {"title" "Hy, Math Adder!" "a" a "b" b})
-  (render-template "math.hyml" vars))
+  (setv locvars {"title" "Hy, Math Adder!" "a" a "b" b})
+  (render-template "math.hyml" locvars variables-and-functions))
 
 ;; AJAX ADDITION
 (route-with-methods ajaxpage "/ajaxpage/" ["GET"] []
@@ -119,13 +93,13 @@
     (html.escape (if (in "customname" request.form)
                      (get request.form "customname")
                      "Visitor")))
-  (setv vars {"customname" customname
+  (setv locvars {"customname" customname
               "title" (% "Hy, %s!" customname)})
-  (render-template "form.hyml" vars))
+  (render-template "form.hyml" locvars variables-and-functions))
 
 ;; USER SESSION
 (route-with-methods sessionpage "/session/" ["GET"] []
   (session-inc "token")
-  (setv vars {"title" "Hy, Sessioner!"
-              "body" (% "Token: %s" (session-handle "token"))})
-  (render-template "session.hyml" vars))
+  (setv locvar {"title" "Hy, Sessioner!"
+                "body" (% "Token: %s" (session-handle "token"))})
+  (render-template "session.hyml" locvar variables-and-functions))
