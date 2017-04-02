@@ -10,7 +10,9 @@ Setup
 -----
 
 ```
+
 $ pip install -r requirements.txt
+
 ```
 
 
@@ -21,7 +23,9 @@ By default running the development webserver and the project application
 in: http://localhost:5000/
 
 ```
+
 $ python shim.py
+
 ```
 
 
