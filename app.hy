@@ -38,7 +38,7 @@
 (defvar title "Hy, World!")
 
 ;; INDEX
-(route-with-methods index "/" {} ["GET"] []
+(route-with-methods index ["/" "/index"] {} ["GET"] []
   ; indent code for pretty print. note that html code must be
   ; "perfect xml" for indent to work so if for example manually inserted
   ; html code has tags and attribute that are not correctly formed
