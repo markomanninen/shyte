@@ -2,7 +2,7 @@
 (html :lang "en" :xmlns "http://www.w3.org/1999/xhtml"
     (head
         (title ~title)
-        (link :rel "stylesheet" :href ~(url "static" :filename "css/hy.css"))
+        (link :rel "stylesheet" :href ~(url-for "static" :filename "css/hy.css"))
         ~(charset "UTF-8"))
     (body
         (div :class "container"
