@@ -4,9 +4,9 @@
 ; Copyright (c) Marko Manninen <elonmedia@gmail.com>, 2017 under the terms of HyML.
 
 (import [flask [Flask session request url-for redirect]])
-; render-template, ml
+; extend-template, ml macros
 (require [hyml.template [*]])
-; extend-template
+; render-template function
 (import [hyml.template [*]])
 ; route-with-methods
 (require [utils [*]])
