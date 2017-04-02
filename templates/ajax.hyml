@@ -2,5 +2,5 @@
 ; define a "block" aka. variables and functions to be used on the
 ; layout with defvar / deffun macros. these will override things 
 ; that a defined in the main controller / method
-~(defvar body (p "body..."))
+~(defvar body (p (a "< Back" :href "/")))
 ~@(include "templates/layout.hyml")
