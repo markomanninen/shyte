@@ -15,7 +15,9 @@
 ; for html.escape
 (import html)
 
-;(def template-dir "templates/")
+; set up custom templates directory
+;(import hyml.template)
+;(def hyml.template.template-dir "templates/")
 
 (def app (Flask "__main__"))
 
