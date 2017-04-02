@@ -1,5 +1,5 @@
-sHyte 0.2
-=========
+sHyte 0.2 (HyML Edition)
+========================
 
 This is a web-site written with `Hy <https://github.com/hylang/hy>`__ using 
 `HyML <https://github.com/markomanninen/hyml>`__ for HTML content generation 
@@ -28,14 +28,26 @@ $ python shim.py
 Application
 -----------
 
-We have a simple application to present three different controllers with 
-routing configuration specific to them: index, user, and math.
+We have a simple application to present few different controllers with 
+routing configuration specific to them:
 
 Index
 ^^^^^
 
-User
-^^^^
+GET Params
+^^^^^^^^^^
 
 Math
 ^^^^
+
+Ajax
+^^^^
+
+GET Form
+^^^^^^^^
+
+POST Form
+^^^^^^^^^
+
+Session handler
+^^^^^^^^^^^^^^^
