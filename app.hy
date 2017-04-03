@@ -37,8 +37,9 @@
 ; and pass it to template as a dictionary variable
 (defvar title "Hy, World!")
 
+
 ;; INDEX
-(route-with-methods index ["/" "/index"] {} ["GET"] []
+(route GET ["/" "/index"]
   ; indent code for pretty print. note that html code must be
   ; "perfect xml" for indent to work so if for example manually inserted
   ; html code has tags and attribute that are not correctly formed
@@ -47,8 +48,10 @@
   ; does not validate according to xml specs.
   (indent (ml ~@(include "templates/index.hyml"))))
 
+
+
 ;; USERNAME : FORM GET
-(route-with-methods greeting "/<username>/" {} ["GET"] [username]
+(route GET "/<username>/" :params [username]
   (setv customname
     (html.escape (if (in "customname" request.args)
                      (get request.args "customname")
@@ -57,30 +60,38 @@
                 "title" (% "Hy, %s!" customname)})
   (render-template "greeting.hyml" locvar))
 
+
+
 ;; MATH ADDITION
-(route-with-methods addition "/<int:a>+<int:b>/" {} ["GET"] [a b]
+(route GET "/<int:a>+<int:b>/" :params [a b]
   (setv locvar {"title" "Hy, Math Adder!" "a" a "b" b})
   (render-template "math.hyml" locvar))
 
+
+
 ;; AJAX ADDITION
-(route-with-methods ajaxpage "/ajaxpage/" {} ["GET"] []
+(route GET "/ajaxpage/"
   (setv locvar {"title" "Hy, MathJax Adder!"})
   (render-template "ajax.hyml" locvar (globals)))
 
 ;; AJAX CALL HANDLER
-(route-with-methods ajaxcall "/ajaxcall/" {} ["POST"] [a b]
+(route POST "/ajaxcall/" :params [a b]
   (render-template "ajax.hyml"))
 
+
+
 ;; GET REQUEST
-(route-with-methods req "/req/" {} ["GET"] []
+(route GET "/req/"
   (setv locvar {"title" "Hy, Requestor!"
                 "body" (if (in "body" request.args)
                            (get request.args "body")
                            "No body parameter found.")})
   (render-template "request.hyml" locvar (globals)))
 
+
+
 ;; POST FORM
-(route-with-methods formpage "/formpage/" {} ["GET" "POST"] []
+(route GET/POST "/formpage/"
   (setv customname
     (html.escape (if (in "customname" request.form)
                      (get request.form "customname")
@@ -89,8 +100,15 @@
                 "title" (% "Hy, %s!" customname)})
   (render-template "form.hyml" locvar (globals)))
 
+
+
 ;; USER SESSION
-(route-with-methods sessionpage "/session/" {} ["GET"] []
+
+; simple session token increment
+(defn session-inc [key]
+  (session-handle key :value (inc (session-get-or-set key 0))))
+
+(route GET "/session/"
   (if (and (in "reset" request.args) (pos? (int (get request.args "reset"))))
       (do (session-handle "token" :value 0)
           (redirect "/session/"))
