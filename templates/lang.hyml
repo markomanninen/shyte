@@ -1,0 +1,9 @@
+~(extend-template "layout.hyml" 
+    {"body" 
+      `(div 
+        (h1 ~title !)
+        (form :method "post" :action ~(url "/language")
+          (p ~(_ "Language") ": " (input :name "lang" :value ~lang))
+          (p (input :type "submit" :value ~(_ "Submit"))))
+        (p (a :href ~(url "") "< " ~(_ "Back"))))
+     "title" title})

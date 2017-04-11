@@ -14,6 +14,8 @@
 (import [utils [*]])
 ; for html.escape
 (import html)
+; babel localization
+(import [flask_babel [refresh gettext :as _]])
 
 ; set up custom templates directory. default is templates/
 ;(import hyml.template)
@@ -73,6 +75,25 @@
 (route GET "/<int:a>+<int:b>/" :params [a b]
   (setv locvar {"title" "Hy, Math Adder!" "a" a "b" b})
   (render-template "math.hyml" locvar))
+
+
+;---------------------------------------------------
+;; LOCALIZATION
+; pybabel extract -F babel.cfg -o messages.pot .
+; pybabel init -i messages.pot -d translations -l fi
+; pybabel init -i messages.pot -d translations -l en
+; pybabel compile -d translations
+; pybabel update -i messages.pot -d translations
+;---------------------------------------------------
+(route GET/POST "/language/"
+  (setv lang (if (in "lang" request.form)
+                 (.join "" (take 2 (html.escape (get request.form "lang"))))
+                 "en"))
+  (assoc app.config "BABEL_DEFAULT_LOCALE" lang)
+  (refresh)
+  (setv locvar {"title" (_ "Hy, Linguist!")
+                "lang" lang})
+  (render-template "lang.hyml" locvar (globals)))
 
 
 ;------------------------

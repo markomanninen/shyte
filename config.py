@@ -6,6 +6,7 @@ class Config(object):
     TESTING = False
     SECRET_KEY = "kJj5p9tth9Q824VbxJbJsYVrDebJyhEE"
     DATABASE_URI = 'sqlite://:memory:'
+    BABEL_DEFAULT_LOCALE = 'fi'
 
 class ProductionConfig(Config):
     DATABASE_URI = 'mysql://user@localhost/foo'
