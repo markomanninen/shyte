@@ -53,7 +53,10 @@
   ; there will be an error on parsing the page. also minimized html code
   ; (omitting start and end tags, boolean attribute minimizing)
   ; does not validate according to xml specs.
-  (indent (ml ~@(include "templates/index.hyml"))))
+  ;(indent (ml ~@(include "templates/index.hyml"))))
+  ;(assoc app.config "BABEL_DEFAULT_LOCALE" "fi")
+  ;(refresh)
+  (render-template "index.hyml" (globals)))
 
 
 ;------------------------
@@ -88,11 +91,10 @@
 (route GET/POST "/language/"
   (setv lang (if (in "lang" request.form)
                  (.join "" (take 2 (html.escape (get request.form "lang"))))
-                 "en"))
+                 (get app.config "BABEL_DEFAULT_LOCALE")))
   (assoc app.config "BABEL_DEFAULT_LOCALE" lang)
   (refresh)
-  (setv locvar {"title" (_ "Hy, Linguist!")
-                "lang" lang})
+  (setv locvar {"lang" lang})
   (render-template "lang.hyml" locvar (globals)))
 
 
@@ -100,9 +102,10 @@
 ;; AJAX ADDITION
 ;------------------------
 (route GET "/ajaxpage/"
-  (setv locvar {"title" "Hy, MathJax Adder!"
+  (setv locvar {"title" (_ "Hy, MathJax Adder!")
                 "body" `(p (a "< Back" :href "/"))})
   (render-template "ajax.hyml" locvar (globals)))
+
 
 ;------------------------
 ;; AJAX CALL HANDLER
@@ -115,10 +118,10 @@
 ;; GET REQUEST
 ;------------------------
 (route GET "/req/"
-  (setv locvar {"title" "Hy, Requestor!"
+  (setv locvar {"title" (_ "Hy, Requestor!")
                 "body" (if (in "body" request.args)
                            (html.escape (get request.args "body"))
-                           "No body parameter found.")})
+                           (_ "No body parameter found."))})
   (render-template "request.hyml" locvar (globals)))
 
 
@@ -148,11 +151,17 @@
           (redirect "/session/"))
       (do
         (session-inc "token")
-        (setv locvar {"title" "Hy, Sessioner!"
+        (setv locvar {"title" (_ "Hy, Sessioner!")
                       ; manual html just for demonstration
                       ; it is better idea to put code on template file
                       "body" (+ (% "<p>Token: %s</p>" (session-handle "token"))
-                                "<p><a href=\"/\">&lt; Back</a></p>
-                                 <p><a href=\"/session/\">Refresh?</a></p>
-                                 <p><a href=\"/session/?reset=1\">Reset!</a></p>")})
+                                "<p><a href=\"/\">&lt; "
+                                (_ "Back")
+                                "</a></p>
+                                 <p><a href=\"/session/\">"
+                                 (_ "Refresh?")
+                                 "</a></p>
+                                 <p><a href=\"/session/?reset=1\">"
+                                 (_ "Reset!")
+                                 "</a></p>")})
         (render-template "session.hyml" locvar (globals)))))
