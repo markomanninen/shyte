@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-04-11 17:37+0300\n"
+"POT-Creation-Date: 2017-04-12 09:54+0300\n"
 "PO-Revision-Date: 2017-04-11 17:50+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fi\n"
@@ -18,15 +18,103 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
 
-msgid "Hy, Linguist!"
-msgstr "Hy, Kielinero!"
+#: app.hy
+msgid "Hy, MathJax Adder!"
+msgstr "Hy, MathJax Adder!"
 
-msgid "Language"
-msgstr "Kieli"
+#: app.hy
+msgid "Hy, Requestor!"
+msgstr "Hy, Requestor!"
 
+#: app.hy
+msgid "No body parameter found."
+msgstr "Body parametriä ei löytynyt"
+
+#: app.hy
+msgid "Hy, Sessioner!"
+msgstr "Hy, Sessioner!"
+
+#: app.hy templates/lang.hyml
 msgid "Back"
 msgstr "Takaisin"
 
+#: app.hy
+msgid "Refresh?"
+msgstr "Päivitä?"
+
+#: app.hy
+msgid "Reset!"
+msgstr "Reset!"
+
+#: templates/content.hyml
+msgid "Welcome to HyML powered Flask web application written with Hy!"
+msgstr "Tervetuloa Hy:lla ohjelmoituun, HyML vetoiseen Flask web -sovellukseen!"
+
+#: templates/content.hyml
+msgid "There are few thing you can do:"
+msgstr "Muutamia juttuja, joita voit tehdä:"
+
+#: templates/content.hyml
+msgid "Greet "
+msgstr "Tervehdi "
+
+#: templates/content.hyml
+msgid "yourself"
+msgstr "itseäsi"
+
+#: templates/content.hyml
+msgid "Pass GET "
+msgstr "Välitä GET "
+
+#: templates/content.hyml
+msgid "Content from URL body parameter..."
+msgstr "Sisältö URL body parametristä..."
+
+#: templates/content.hyml
+msgid "parameters"
+msgstr "parametrit "
+
+#: templates/content.hyml
+msgid "Handle "
+msgstr "Käsittele "
+
+#: templates/content.hyml
+msgid "sessions"
+msgstr "sessiot"
+
+#: templates/content.hyml
+msgid "Submit "
+msgstr "Lähetä "
+
+#: templates/content.hyml
+msgid "forms"
+msgstr "lomakkeet"
+
+#: templates/content.hyml
+msgid "Ajax "
+msgstr "Ajax "
+
+#: templates/content.hyml
+msgid "things"
+msgstr "juttuja"
+
+#: templates/content.hyml
+msgid "Language "
+msgstr "Kieli "
+
+#: templates/content.hyml
+msgid "Add numbers like "
+msgstr "Lisää numeroita kuten "
+
+#: templates/lang.hyml
+msgid "Hy, Linguist"
+msgstr "Hy, Kielinero"
+
+#: templates/lang.hyml
+msgid "Language"
+msgstr "Kieli"
+
+#: templates/lang.hyml
 msgid "Submit"
 msgstr "Lähetä"
 

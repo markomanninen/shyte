@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-04-11 17:37+0300\n"
+"POT-Creation-Date: 2017-04-12 09:54+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,15 +17,103 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
 
-msgid "Hy, Linguist!"
-msgstr "Hy, Linguist!"
+#: app.hy
+msgid "Hy, MathJax Adder!"
+msgstr ""
 
-msgid "Language"
-msgstr "Language"
+#: app.hy
+msgid "Hy, Requestor!"
+msgstr ""
 
+#: app.hy
+msgid "No body parameter found."
+msgstr ""
+
+#: app.hy
+msgid "Hy, Sessioner!"
+msgstr ""
+
+#: app.hy templates/lang.hyml
 msgid "Back"
-msgstr "Back"
+msgstr ""
 
+#: app.hy
+msgid "Refresh?"
+msgstr ""
+
+#: app.hy
+msgid "Reset!"
+msgstr ""
+
+#: templates/content.hyml
+msgid "Welcome to HyML powered Flask web application written with Hy!"
+msgstr ""
+
+#: templates/content.hyml
+msgid "There are few thing you can do:"
+msgstr ""
+
+#: templates/content.hyml
+msgid "Greet "
+msgstr ""
+
+#: templates/content.hyml
+msgid "yourself"
+msgstr ""
+
+#: templates/content.hyml
+msgid "Pass GET "
+msgstr ""
+
+#: templates/content.hyml
+msgid "Content from URL body parameter..."
+msgstr ""
+
+#: templates/content.hyml
+msgid "parameters"
+msgstr ""
+
+#: templates/content.hyml
+msgid "Handle "
+msgstr ""
+
+#: templates/content.hyml
+msgid "sessions"
+msgstr ""
+
+#: templates/content.hyml
+msgid "Submit "
+msgstr ""
+
+#: templates/content.hyml
+msgid "forms"
+msgstr ""
+
+#: templates/content.hyml
+msgid "Ajax "
+msgstr ""
+
+#: templates/content.hyml
+msgid "things"
+msgstr ""
+
+#: templates/content.hyml
+msgid "Language "
+msgstr ""
+
+#: templates/content.hyml
+msgid "Add numbers like "
+msgstr ""
+
+#: templates/lang.hyml
+msgid "Hy, Linguist"
+msgstr ""
+
+#: templates/lang.hyml
+msgid "Language"
+msgstr ""
+
+#: templates/lang.hyml
 msgid "Submit"
-msgstr "Submit"
+msgstr ""
 
